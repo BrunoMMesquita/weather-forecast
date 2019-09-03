@@ -1,0 +1,21 @@
+@import '../../../styles/utils/color';
+@import '../../../styles/utils/size';
+
+.app-header{
+  padding: extract(@size, 2) extract(@size, 4);
+  color: @gray;
+  background-color: rgba(@whitish, .9);
+  &,
+  h1{
+    display: flex;
+    align-items: center;
+    padding: extract(@size, 3);
+    font-size: 20px;
+    line-height: 1em;
+  }
+  [data-icon]{
+    margin-right: extract(@size, 4);
+    margin-bottom: 25px;
+    font-size: 32px;
+  }
+}

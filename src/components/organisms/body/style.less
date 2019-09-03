@@ -1,0 +1,63 @@
+@import '../../../styles/utils/color';
+@import '../../../styles/utils/size';
+
+.main{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  color: @white;
+  .loading{
+    display: flex;
+    align-items: center;
+    padding: extract(@size, 4);
+    background-color: @yellow;
+  }
+  .row{
+    display: flex;
+    &:nth-child(1){
+      background-color: rgba(@yellow, .7);
+    }
+    &:nth-child(2){
+      background-color: @yellow;
+    }
+    &:nth-child(3){
+      flex-grow: 1;
+      background-color: darken(@yellow, 5%);
+    }
+    .column{
+      display: flex;
+      flex-direction: column;
+      &:nth-child(1) {
+        width: 250px;
+      }
+      &:nth-child(2) {
+        padding-top: extract(@size, 4);
+        padding-bottom: extract(@size, 6);
+      }
+      .icon{
+        margin: -0.11em auto;
+        font-size: 170px;
+      }
+      .additional-info{
+        display: flex;
+        flex-direction: column;
+        margin-top: extract(@size, 4);
+      }
+      strong{
+        font-size: extract(@size, 6);
+        font-weight: 500;
+        &.capitalize{
+          text-transform: capitalize;
+        }
+        &.space-bottom{
+          margin-bottom: extract(@size, 3);
+        }
+       
+      }
+    }
+    .temp{
+      cursor: pointer;
+    }
+  }
+  
+}
