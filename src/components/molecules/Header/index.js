@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import './style.less'
 
 export class Header extends Component {
-  render () {
+  render() {
     const { userLocation, error } = this.props
     return (
       <header className="app-header">
@@ -13,14 +13,10 @@ export class Header extends Component {
               {userLocation.city}, {userLocation.state}
             </div>
           ) : (
-            error ? (
-              <span>
-                Erro ao carregar informações
-              </span>
-            ) : (
-              'Buscando localidade...'
-            )
-          )}
+              (
+                'Buscando localidade...'
+              )
+            )}
         </h1>
       </header>
     )

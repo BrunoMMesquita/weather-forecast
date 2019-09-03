@@ -10,16 +10,13 @@ export class App extends Component {
   state = {
     todayBackground: null,
     userLocation: null,
-    temperature: '',
-    error: false,
+    temperature: ''
   }
 
   componentDidMount() {
     this.setTodayBackground()
     navigator.geolocation.getCurrentPosition(
-      this.setUserLocation,
-      this.setUserLocation,
-      { timeout: 5000 }
+      this.setUserLocation
     )
   }
 
@@ -29,19 +26,15 @@ export class App extends Component {
   }
 
   setUserLocation = async position => {
-    let userLocation
-
-    userLocation = await getLocation(position)
-    
+    const userLocation = await getLocation(position)
+  
     if (userLocation) {
       this.setState({ userLocation })
-    } else {
-      this.setState({ error: true })
-    }
+    } 
   }
 
   getThermalSensation = (temp) => {
-    let temperature = 'normal'
+    let temperature = 'environment'
 
     if (temp < 15) {
       temperature = 'cold'
@@ -56,8 +49,7 @@ export class App extends Component {
     const {
       todayBackground,
       userLocation,
-      temperature,
-      error,
+      temperature
     } = this.state
 
     return (
@@ -69,12 +61,10 @@ export class App extends Component {
         <div id="main-content">
           <Header
             userLocation={userLocation}
-            error={error}
           />
           <Body
             city={userLocation && userLocation.city}
             setBackground={this.getThermalSensation}
-            error={error}
           />
         </div>
       </div>

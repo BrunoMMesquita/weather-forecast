@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 
 import './style.less'
 
-import { CalculateCelsiusForFahrenheit, CalculateMetroToKilometer, iconsDictionary } from '../../../utils'
+import { CalculateCelsiusForFahrenheit, weatherIcons, getInfoAditional } from '../../../utils'
 
 import { getWeather } from '../../../services'
+
+import iconLoading from '../../../assets/images/loading-icon.svg'
+
 export class Body extends Component {
   state = {
     weatherInformation: '',
@@ -19,12 +22,10 @@ export class Body extends Component {
   componentDidUpdate (prevProps, prevState) {
     const { props, state } = this
 
-    // Fetch weather information when find the user location
     if (prevProps.city !== props.city) {
       this.setWeatherInformation()
     }
 
-    // Set gradient background by thermal sensation
     if (prevState.weatherInformation !== state.weatherInformation) {
       this.props.setBackground(state.weatherInformation.list[0].main.temp)
     }
@@ -72,14 +73,14 @@ export class Body extends Component {
     }
   }
 
-  renderTempInfo = (temp, i) => {
+  getInfoTemp = (temp, i) => {
     const { weatherInformation, days} = this.state
     const todayInfo = weatherInformation && weatherInformation.list[0]
     return temp && (
       <div key={temp} className="row">
         <div className="column">
           {(i === 0 && weatherInformation) && (
-            <i data-icon={iconsDictionary[todayInfo.weather[0].main]} className="icon" />
+            <i data-icon={weatherIcons[todayInfo.weather[0].main]} className="icon" />
           )}
         </div>
         <div className="column">
@@ -87,40 +88,26 @@ export class Body extends Component {
           <strong onClick={this.toggleTempUnit} className="temp">
             {parseInt(temp)}º{this.state.isCelsius ? 'C' : 'F'}
           </strong>
-          {this.renderAdditionalInfo(i, todayInfo)}
+          {getInfoAditional(i, todayInfo)}
         </div>
       </div>
     )
   }
 
-  // Render wind, humidity and pressure information
-  renderAdditionalInfo = (i, info) => {
-    return i === 0 && (
-      <div className="additional-info">
-        <strong className="capitalize space-bottom">
-          {info.weather[0].description}
-        </strong>
-        <span>Vento: {CalculateMetroToKilometer(info.wind.speed)}Km/h</span>
-        <span>Humidade: {info.main.humidity}%</span>
-        <span>Pressão: {info.main.pressure}hPA</span>
-      </div>
-    )
-  }
 
   render () {
     const { weatherInformation, isLoading, today, tomorrow, afterTomorrow  } = this.state
-    const { error } = this.props
-    return !error && (
+    return (
       <div className="main">
         {!!weatherInformation && (
           [today,
             tomorrow,
             afterTomorrow,
-          ].map(this.renderTempInfo)
+          ].map(this.getInfoTemp)
         )}
         {isLoading && (
-          <div className="loading">
-            Buscando informações...
+          <div className="icon-loading">
+            <img src={iconLoading}></img>
           </div>
         )}
       </div>

@@ -6,11 +6,14 @@
   flex-direction: column;
   flex-grow: 1;
   color: @white;
-  .loading{
+  .icon-loading{
     display: flex;
     align-items: center;
     padding: extract(@size, 4);
     background-color: @yellow;
+    img{
+      height: 50px;
+    }
   }
   .row{
     display: flex;
@@ -58,6 +61,7 @@
     .temp{
       cursor: pointer;
     }
+  
   }
   
 }

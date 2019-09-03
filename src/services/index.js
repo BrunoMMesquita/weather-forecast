@@ -1,3 +1,4 @@
+//Usado para pegar a localização do usuário
 export async function getLocation(position) {
     const lat = position.coords.latitude
     const lng = position.coords.longitude
@@ -12,6 +13,7 @@ export async function getLocation(position) {
     }
 }
 
+//Aqui onde pega a temperatura
 export async function getWeather(city) {
     const key = '7ba73e0eb8efe773ed08bfd0627f07b8'
     const url = 'http://api.openweathermap.org/data/2.5/'
@@ -33,7 +35,7 @@ export async function getWeather(city) {
     return aheadResponse
 }
 
-
+//Usado para pegar o backgound do Bing
 export async function getBackgroundBing() {
     const url_api = 'https://cors-anywhere.herokuapp.com/https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=pt-BR'
     const url_bing = 'https://www.bing.com'
