@@ -17,13 +17,13 @@ export async function getLocation(position) {
 export async function getWeather(city) {
     const key = '7ba73e0eb8efe773ed08bfd0627f07b8'
     const url = 'http://api.openweathermap.org/data/2.5/'
-    // Fetch today weather information
-    const TODAY_RAW_API_URL = `${url}weather?q=${city}&units=metric&lang=pt&APPID=${key}`
-    // Fetch ahead weather information
-    const AHEAD_RAW_API_URL = `${url}forecast?q=${city}&units=metric&cnt=25&lang=pt&APPID=${key}`
+    // url para pegar info dia atual
+    const urlToday = `${url}weather?q=${city}&units=metric&lang=pt&APPID=${key}`
+    // Dias seguintes
+    const urlAllDays = `${url}forecast?q=${city}&units=metric&cnt=10&lang=pt&APPID=${key}`
 
-    const todayRequest = fetch(TODAY_RAW_API_URL)
-    const aheadRequest = fetch(AHEAD_RAW_API_URL)
+    const todayRequest = fetch(urlToday)
+    const aheadRequest = fetch(urlAllDays)
 
     const [todayRawResponse, aheadRawResponse] = await Promise.all([todayRequest, aheadRequest])
 

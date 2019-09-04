@@ -14,13 +14,14 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    this.setTodayBackground()
+    this.SetBindBackgorund()
     navigator.geolocation.getCurrentPosition(
       this.setUserLocation
     )
   }
 
-  async setTodayBackground() {
+  //Aqui define o backgound do bing
+  async SetBindBackgorund() {
     const todayBackground = await getBackgroundBing()
     this.setState({ todayBackground })
   }

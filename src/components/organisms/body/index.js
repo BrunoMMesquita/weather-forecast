@@ -40,6 +40,7 @@ export class Body extends Component {
   async setWeatherInformation () {
     this.setState({ isLoading: true })
     const weatherInformation = await getWeather(this.props.city)
+    console.log(weatherInformation)
     this.setState({
       weatherInformation,
       isLoading: false,

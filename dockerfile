@@ -1,9 +1,13 @@
-FROM mhart/alpine-node:11 AS builder
-WORKDIR /app
-COPY package*.json ./
+FROM node:8
 
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY package.json .
+COPY yarn.lock .
 RUN yarn
 
-COPY . /app
+COPY . ./code
 
-CMD ["yarn", "start"]
+EXPOSE 3000
+CMD [ "npm", "start"]
